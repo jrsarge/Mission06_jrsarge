@@ -47,7 +47,9 @@ namespace Mission06_jrsarge.Controllers
         [HttpGet]
         public IActionResult ViewMovies()
         {
-            var movies = SeeMoviesContext.Responses.ToList();
+            var movies = SeeMoviesContext.Responses
+                .OrderBy(x => x.Title)
+                .ToList();
 
             return View(movies);
         }
