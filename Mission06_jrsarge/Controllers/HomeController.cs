@@ -11,12 +11,12 @@ namespace Mission06_jrsarge.Controllers
 {
     public class HomeController : Controller
     {
-        private MovieSubmissionContext _blahContext { get; set; }
+        private MovieSubmissionContext SeeMoviesContext { get; set; }
 
         //Constructor
         public HomeController(MovieSubmissionContext someName)
         {
-            _blahContext = someName;
+            SeeMoviesContext = someName;
         }
 
         public IActionResult Index()
@@ -33,8 +33,8 @@ namespace Mission06_jrsarge.Controllers
         [HttpPost]
         public IActionResult Movies(MovieSubmission ar)
         {
-            _blahContext.Add(ar);
-            _blahContext.SaveChanges();
+            SeeMoviesContext.Add(ar);
+            SeeMoviesContext.SaveChanges();
 
             return View("Confirmation");
         }
@@ -44,9 +44,12 @@ namespace Mission06_jrsarge.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult ViewMovies()
         {
-            return View();
+            var movies = SeeMoviesContext.Responses.ToList();
+
+            return View(movies);
         }
     }
 }
