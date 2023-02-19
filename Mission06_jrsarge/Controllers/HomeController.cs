@@ -11,13 +11,11 @@ namespace Mission06_jrsarge.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private MovieSubmissionContext _blahContext { get; set; }
 
         //Constructor
-        public HomeController(ILogger<HomeController> logger, MovieSubmissionContext someName)
+        public HomeController(MovieSubmissionContext someName)
         {
-            _logger = logger;
             _blahContext = someName;
         }
 
@@ -44,17 +42,6 @@ namespace Mission06_jrsarge.Controllers
         public IActionResult MyPodcasts()
         {
             return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
