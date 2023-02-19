@@ -43,5 +43,10 @@ namespace Mission06_jrsarge.Controllers
         {
             return View();
         }
+
+        public IActionResult ViewMovies()
+        {
+            return View();
+        }
     }
 }
