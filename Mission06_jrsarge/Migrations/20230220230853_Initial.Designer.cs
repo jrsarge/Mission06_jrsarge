@@ -8,7 +8,7 @@ using Mission06_jrsarge.Models;
 namespace Mission06_jrsarge.Migrations
 {
     [DbContext(typeof(MovieSubmissionContext))]
-    [Migration("20230220220129_Initial")]
+    [Migration("20230220230853_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,12 +23,54 @@ namespace Mission06_jrsarge.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CategoryName")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("CategoryID");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryID = 1,
+                            CategoryName = "Family"
+                        },
+                        new
+                        {
+                            CategoryID = 2,
+                            CategoryName = "Action/Adventure"
+                        },
+                        new
+                        {
+                            CategoryID = 3,
+                            CategoryName = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryID = 4,
+                            CategoryName = "Drama"
+                        },
+                        new
+                        {
+                            CategoryID = 5,
+                            CategoryName = "Horror/Suspense"
+                        },
+                        new
+                        {
+                            CategoryID = 6,
+                            CategoryName = "Miscellaneous"
+                        },
+                        new
+                        {
+                            CategoryID = 7,
+                            CategoryName = "Television"
+                        },
+                        new
+                        {
+                            CategoryID = 8,
+                            CategoryName = "VHS"
+                        });
                 });
 
             modelBuilder.Entity("Mission06_jrsarge.Models.MovieSubmission", b =>

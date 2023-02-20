@@ -11,6 +11,6 @@ namespace Mission06_jrsarge.Models
         [Key]
         [Required]
         public int CategoryID { get; set; }
-        public int CategoryName { get; set; }
+        public string CategoryName { get; set; }
     }
 }

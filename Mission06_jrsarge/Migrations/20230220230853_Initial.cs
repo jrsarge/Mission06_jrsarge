@@ -7,16 +7,16 @@ namespace Mission06_jrsarge.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "Categories",
                 columns: table => new
                 {
                     CategoryID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CategoryName = table.Column<int>(nullable: false)
+                    CategoryName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.CategoryID);
+                    table.PrimaryKey("PK_Categories", x => x.CategoryID);
                 });
 
             migrationBuilder.CreateTable(
@@ -38,12 +38,52 @@ namespace Mission06_jrsarge.Migrations
                 {
                     table.PrimaryKey("PK_Responses", x => x.MovieID);
                     table.ForeignKey(
-                        name: "FK_Responses_Category_CategoryID",
+                        name: "FK_Responses_Categories_CategoryID",
                         column: x => x.CategoryID,
-                        principalTable: "Category",
+                        principalTable: "Categories",
                         principalColumn: "CategoryID",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryID", "CategoryName" },
+                values: new object[] { 1, "Family" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryID", "CategoryName" },
+                values: new object[] { 2, "Action/Adventure" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryID", "CategoryName" },
+                values: new object[] { 3, "Comedy" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryID", "CategoryName" },
+                values: new object[] { 4, "Drama" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryID", "CategoryName" },
+                values: new object[] { 5, "Horror/Suspense" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryID", "CategoryName" },
+                values: new object[] { 6, "Miscellaneous" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryID", "CategoryName" },
+                values: new object[] { 7, "Television" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryID", "CategoryName" },
+                values: new object[] { 8, "VHS" });
 
             migrationBuilder.InsertData(
                 table: "Responses",
@@ -72,7 +112,7 @@ namespace Mission06_jrsarge.Migrations
                 name: "Responses");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "Categories");
         }
     }
 }
