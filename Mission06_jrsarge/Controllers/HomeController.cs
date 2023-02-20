@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Mission06_jrsarge.Models;
 using System;
@@ -27,6 +28,8 @@ namespace Mission06_jrsarge.Controllers
         [HttpGet]
         public IActionResult Movies()
         {
+            ViewBag.Categories = SeeMoviesContext.Categories.ToList();
+
             return View();
         }
 
