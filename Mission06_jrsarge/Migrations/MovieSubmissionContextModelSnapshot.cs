@@ -15,15 +15,28 @@ namespace Mission06_jrsarge.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.32");
 
+            modelBuilder.Entity("Mission06_jrsarge.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CategoryName")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("CategoryID");
+
+                    b.ToTable("Category");
+                });
+
             modelBuilder.Entity("Mission06_jrsarge.Models.MovieSubmission", b =>
                 {
                     b.Property<int>("MovieID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .IsRequired()
@@ -52,13 +65,15 @@ namespace Mission06_jrsarge.Migrations
 
                     b.HasKey("MovieID");
 
+                    b.HasIndex("CategoryID");
+
                     b.ToTable("Responses");
 
                     b.HasData(
                         new
                         {
                             MovieID = 1,
-                            Category = "Family",
+                            CategoryID = 1,
                             Director = "Chris Buck",
                             Edited = false,
                             LentTo = "",
@@ -70,7 +85,7 @@ namespace Mission06_jrsarge.Migrations
                         new
                         {
                             MovieID = 2,
-                            Category = "Family",
+                            CategoryID = 1,
                             Director = "Rob Minkoff",
                             Edited = false,
                             LentTo = "",
@@ -82,7 +97,7 @@ namespace Mission06_jrsarge.Migrations
                         new
                         {
                             MovieID = 3,
-                            Category = "Family",
+                            CategoryID = 1,
                             Director = "Chris Buck",
                             Edited = false,
                             LentTo = "",
@@ -91,6 +106,15 @@ namespace Mission06_jrsarge.Migrations
                             Title = "Frozen",
                             Year = (short)2013
                         });
+                });
+
+            modelBuilder.Entity("Mission06_jrsarge.Models.MovieSubmission", b =>
+                {
+                    b.HasOne("Mission06_jrsarge.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -22,7 +22,7 @@ namespace Mission06_jrsarge.Models
                 new MovieSubmission
                 {
                     MovieID = 1,
-                    Category = "Family",
+                    CategoryID = 1,
                     Title = "Tarzan",
                     Year = 1999,
                     Director = "Chris Buck",
@@ -34,7 +34,7 @@ namespace Mission06_jrsarge.Models
                 new MovieSubmission
                 {
                     MovieID = 2,
-                    Category = "Family",
+                    CategoryID = 1,
                     Title = "Stuart Little",
                     Year = 1999,
                     Director = "Rob Minkoff",
@@ -46,7 +46,7 @@ namespace Mission06_jrsarge.Models
                 new MovieSubmission
                 {
                     MovieID = 3,
-                    Category = "Family",
+                    CategoryID = 1,
                     Title = "Frozen",
                     Year = 2013,
                     Director = "Chris Buck",
