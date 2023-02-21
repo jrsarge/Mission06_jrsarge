@@ -51,6 +51,7 @@ namespace Mission06_jrsarge.Controllers
         public IActionResult ViewMovies()
         {
             var movies = SeeMoviesContext.Responses
+                .Include(x => x.Category)
                 .OrderBy(x => x.Title)
                 .ToList();
 
