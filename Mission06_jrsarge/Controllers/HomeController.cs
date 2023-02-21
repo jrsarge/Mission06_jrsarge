@@ -57,5 +57,15 @@ namespace Mission06_jrsarge.Controllers
 
             return View(movies);
         }
+
+        public IActionResult Edit()
+        {
+            return View();
+        }
+
+        public IActionResult Delete()
+        {
+            return View();
+        }
     }
 }
