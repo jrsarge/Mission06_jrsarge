@@ -58,13 +58,13 @@ namespace Mission06_jrsarge.Controllers
             return View(movies);
         }
 
-        public IActionResult Edit()
+        public IActionResult Edit(int movieid)
         {
             ViewBag.Categories = SeeMoviesContext.Categories.ToList();
 
-            //var submission = SeeMoviesContext.Responses.Single();
+            var submission = SeeMoviesContext.Responses.Single(x => x.MovieID == movieid);
 
-            return View("Movies");
+            return View("Movies", submission);
         }
 
         public IActionResult Delete()
