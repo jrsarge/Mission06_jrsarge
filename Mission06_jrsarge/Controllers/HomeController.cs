@@ -60,7 +60,11 @@ namespace Mission06_jrsarge.Controllers
 
         public IActionResult Edit()
         {
-            return View();
+            ViewBag.Categories = SeeMoviesContext.Categories.ToList();
+
+            //var submission = SeeMoviesContext.Responses.Single();
+
+            return View("Movies");
         }
 
         public IActionResult Delete()
