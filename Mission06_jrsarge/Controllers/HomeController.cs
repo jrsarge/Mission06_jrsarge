@@ -88,6 +88,15 @@ namespace Mission06_jrsarge.Controllers
             return RedirectToAction("ViewMovies");
         }
 
+        [HttpGet]
+        public IActionResult Delete(int movieid)
+        {
+            var submission = SeeMoviesContext.Responses.Single(x => x.MovieID == movieid);
+
+            return View(submission);
+        }
+
+        [HttpPost]
         public IActionResult Delete()
         {
             return View();
