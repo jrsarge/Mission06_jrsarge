@@ -5,10 +5,12 @@
 @model MovieSubmission
 
 <h2>Confirm the Deleting</h2>
-<h3>Are you sure you want to delete the record for @Model.Title </h3>
+<h3>Are you sure you want to delete the record for @Model.Title? </h3>
 
 <form method="post" asp-action="Delete">
     <a asp-controller="Home" asp-action="ViewMovies" class="btn btn-primary"> Cancel </a>
     <br />
     <button type="submit">Delete</button>
+
+    <input type="hidden" asp-for="MovieID" />
 </form>

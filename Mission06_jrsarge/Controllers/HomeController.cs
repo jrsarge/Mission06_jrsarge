@@ -97,9 +97,13 @@ namespace Mission06_jrsarge.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete()
+        public IActionResult Delete(MovieSubmission ms)
         {
-            return View();
+            SeeMoviesContext.Responses.Remove(ms);
+            SeeMoviesContext.SaveChanges();
+
+
+            return RedirectToAction("ViewMovies");
         }
     }
 }
