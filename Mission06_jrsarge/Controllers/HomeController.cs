@@ -36,10 +36,21 @@ namespace Mission06_jrsarge.Controllers
         [HttpPost]
         public IActionResult Movies(MovieSubmission ar)
         {
-            SeeMoviesContext.Add(ar);
-            SeeMoviesContext.SaveChanges();
+            //If Valid
+            if (ModelState.IsValid)
+            {
+                SeeMoviesContext.Add(ar);
+                SeeMoviesContext.SaveChanges();
 
-            return View("Confirmation");
+                return View("Confirmation");
+            }
+
+            //If Invalid
+            else
+            {
+                ViewBag.Categories = SeeMoviesContext.Categories.ToList();
+                return View(ar);
+            }
         }
 
         public IActionResult MyPodcasts()
