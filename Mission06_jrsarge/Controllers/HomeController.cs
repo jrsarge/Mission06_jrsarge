@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Final_jrsarge.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Mission06_jrsarge.Models;
@@ -12,12 +13,11 @@ namespace Mission06_jrsarge.Controllers
 {
     public class HomeController : Controller
     {
-        private MovieSubmissionContext SeeMoviesContext { get; set; }
+        private IFinalRepository repo;
 
-        //Constructor
-        public HomeController(MovieSubmissionContext someName)
+        public HomeController(IFinalRepository temp)
         {
-            SeeMoviesContext = someName;
+            repo = temp;
         }
 
         public IActionResult Index()
@@ -26,15 +26,15 @@ namespace Mission06_jrsarge.Controllers
         }
 
         [HttpGet]
-        public IActionResult Movies()
+        public IActionResult Add()
         {
-            ViewBag.Categories = SeeMoviesContext.Categories.ToList();
+            ViewBag.Categories = repo.Categories.ToList();
 
             return View();
         }
 
         [HttpPost]
-        public IActionResult Movies(MovieSubmission ar)
+        public IActionResult Add(MovieSubmission ar)
         {
             //If Valid
             if (ModelState.IsValid)
@@ -59,7 +59,7 @@ namespace Mission06_jrsarge.Controllers
         }
 
         [HttpGet]
-        public IActionResult ViewMovies()
+        public IActionResult ViewEntertainers()
         {
             var movies = SeeMoviesContext.Responses
                 .Include(x => x.Category)

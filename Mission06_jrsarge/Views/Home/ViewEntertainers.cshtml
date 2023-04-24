@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "View Movies";
+    ViewData["Title"] = "View Entertainers";
 }
 
 @model List<MovieSubmission>
@@ -39,3 +39,8 @@
     </tbody>
 
 </table>
+
+<div>
+    @*a link styled like a button, diabolical*@
+    <a class = "btn btn-primary" asp-controller="Home" asp-action="Add">Add Entertainter</a>
+</div>
