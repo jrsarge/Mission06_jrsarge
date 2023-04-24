@@ -12,14 +12,16 @@ namespace Mission06_jrsarge.Models
         [Required]
         public int MovieID { get; set; }
         [Required]
-        public string Category { get; set; }
-        [Required]
+        public int CategoryID { get; set; }
+        [Required(ErrorMessage ="A category must be selected!")]
+        public Category Category { get; set; }
+        [Required(ErrorMessage ="Please enter in a movie title.")]
         public string Title { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Please enter in the movie year")]
         public short Year { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Please enter in the director of the movie")]
         public string Director { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Please enter in the movie rating")]
         public string Rating { get; set; }
         public bool Edited { get; set; }
         public string LentTo { get; set; }

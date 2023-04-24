@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Mission06_jrsarge.Models;
 using System;
@@ -11,14 +12,12 @@ namespace Mission06_jrsarge.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private MovieSubmissionContext _blahContext { get; set; }
+        private MovieSubmissionContext SeeMoviesContext { get; set; }
 
         //Constructor
-        public HomeController(ILogger<HomeController> logger, MovieSubmissionContext someName)
+        public HomeController(MovieSubmissionContext someName)
         {
-            _logger = logger;
-            _blahContext = someName;
+            SeeMoviesContext = someName;
         }
 
         public IActionResult Index()
@@ -29,16 +28,29 @@ namespace Mission06_jrsarge.Controllers
         [HttpGet]
         public IActionResult Movies()
         {
+            ViewBag.Categories = SeeMoviesContext.Categories.ToList();
+
             return View();
         }
 
         [HttpPost]
         public IActionResult Movies(MovieSubmission ar)
         {
-            _blahContext.Add(ar);
-            _blahContext.SaveChanges();
+            //If Valid
+            if (ModelState.IsValid)
+            {
+                SeeMoviesContext.Add(ar);
+                SeeMoviesContext.SaveChanges();
 
-            return View("Confirmation");
+                return View("Confirmation");
+            }
+
+            //If Invalid
+            else
+            {
+                ViewBag.Categories = SeeMoviesContext.Categories.ToList();
+                return View(ar);
+            }
         }
 
         public IActionResult MyPodcasts()
@@ -46,15 +58,52 @@ namespace Mission06_jrsarge.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpGet]
+        public IActionResult ViewMovies()
         {
-            return View();
+            var movies = SeeMoviesContext.Responses
+                .Include(x => x.Category)
+                .OrderBy(x => x.Title)
+                .ToList();
+
+            return View(movies);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpGet]
+        public IActionResult Edit(int movieid)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            ViewBag.Categories = SeeMoviesContext.Categories.ToList();
+
+            var submission = SeeMoviesContext.Responses.Single(x => x.MovieID == movieid);
+
+            return View ("Movies", submission);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(MovieSubmission soup)
+        {
+            SeeMoviesContext.Update(soup);
+            SeeMoviesContext.SaveChanges();
+
+            return RedirectToAction("ViewMovies");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int movieid)
+        {
+            var submission = SeeMoviesContext.Responses.Single(x => x.MovieID == movieid);
+
+            return View(submission);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(MovieSubmission ms)
+        {
+            SeeMoviesContext.Responses.Remove(ms);
+            SeeMoviesContext.SaveChanges();
+
+
+            return RedirectToAction("ViewMovies");
         }
     }
 }
